@@ -633,6 +633,8 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend {
 
         public function withdraw(\Illuminate\Http\Request $request)
         {
+
+            dd($request);
             if ($request->amount < 50) {
                 return response()->json(['error' => true, 'msg' => 'You cannot withdraw less than 50.'], 200);
             }
@@ -700,14 +702,10 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend {
             // dd("qwertyuio", $user->withdrawable, $user->wager);
             // exit(0);
             if ($user->wager > 0) {
-                dd("wager");
-                exit(0);
                 $playWager = $user->bonus * 70 > $user->wager ? $user->bonus * 70 - $user->wager : 0;
                 return response()->json(['error' => true, 'msg' => 'You cannot withdraw as you have bonus funds in your account and you have not met the minimun play through required.', 'totalBalance' => number_format((float)$user->balance, 2, '.', ''), 'realBalance' => number_format((float)$user->getRealBalance(), 2, '.', ''), 'bonusBalance' => number_format((float)$user->getBonusBalance(), 2, '.', ''), 'wager' => number_format((float)$user->wager, 2, '.', ''), 'playWager' => number_format((float)$playWager, 2, '.', '')], 200);
             }
             if ($withdrawable < $request->amount) {
-                dd("withdrawable");
-                exit(0);
                 return response()->json(['error' => true, 'msg' => 'Maximun withdrawable balance is ' . $withdrawable], 200);
             }
             $newWithdraw = new \VanguardLTE\Transaction;
@@ -716,7 +714,8 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend {
             $newWithdraw->type = 'out';
             $newWithdraw->summ = -1 * $request->amount;
             $newWithdraw->email = $request->email;
-            $newWithdraw->phone = $request->phone;
+            $newWithdraw->phone = $request->wphone;
+            dd("dfghjk", $request->wphone);
             $newWithdraw->transaction = hash('crc32b', rand());
             if ($request->payment_method == 'crypto') {
                 $newWithdraw->value = $request->withdraw_crypto_type;

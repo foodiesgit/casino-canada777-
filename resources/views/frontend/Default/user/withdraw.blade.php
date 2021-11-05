@@ -74,7 +74,7 @@
                                     </div>
                                     <div class="field field_name_field2 fn-validate text" data-validation-type="field2">
                                         <div class="field__control">
-                                            <input id="tphone" type="text" name="Telephone" value="" placeholder="Telephone" required>
+                                            <input id="wphone" type="text" name="wphone" value="" placeholder="Telephone" required>
                                         </div>
                                     </div>
                                 </div>

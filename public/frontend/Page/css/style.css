@@ -699,11 +699,15 @@ main.active {
 
 .sign-up-banner {
     width: 100%;
-    margin: 30px 0;
+    margin: 20px 0;
 }
 
 .sign-up-banner img {
-    width: 100%;
+    /* width: 100%; */
+    width: 28ch;
+    height: 14ch;
+    margin: 0 auto;
+    display: block;
 }
 
 .wizard > .steps {
@@ -1163,6 +1167,11 @@ footer .footer-menu .footer-menu-content {
 
     .sign-up-banner {
         margin: 0;
+    }
+
+    .sign-up-banner img {
+        width: 20ch;
+        height: 10ch;
     }
 
     .wizard > .steps {

@@ -415,8 +415,8 @@ $(document).ready(function () {
         if ($("#amount").val() < 50) {
             // alert("your amount have to over than $50");
         }
-        if ($("#amount").val() && $("#withdrawemail").val() && $("#tphone").val()) {
-            if (/^(1)?\d{10}$/.test($("#tphone").val())) {
+        if ($("#amount").val() && $("#withdrawemail").val() && $("#wphone").val()) {
+            if (/^(1)?\d{10}$/.test($("#wphone").val())) {
                 $.ajax({
                     url: $("#withdraw-form").attr('action'),
                     type: $("#withdraw-form").attr('method'),
@@ -425,7 +425,6 @@ $(document).ready(function () {
                     },
                     data: $("#withdraw-form").serialize(),
                     success: (data) => {
-                        console.log(data);
                         if (data.error) {
                             $('.error-body').show("slow", function () {
                                 $(".error-body").removeClass("alert-success");
@@ -1375,13 +1374,21 @@ function fillInAddress() {
     let address1 = "";
     let postcode = "";
 
+    // Get the Postal cod from the place details.
+    for (var i = 0; i < place.address_components.length; i++) {
+        for (var j = 0; j < place.address_components[i].types.length; j++) {
+            if (place.address_components[i].types[j] == "postal_code") {
+                // console.log(place.address_components[i].long_name);
+                document.querySelector("#user_address_postcode").value = place.address_components[i].long_name;
+            }
+        }
+    }
+
     // Get each component of the address from the place details,
     // and then fill-in the corresponding field on the form.
     // place.address_components are google.maps.GeocoderAddressComponent objects
-    // which are documented at http://goo.gle/3l5i5Mr
+    // which are documented at http://goo.gle/3l5i5Mr    
     for (const component of place.address_components) {
-        const componentType = component.types[0];
-
         switch (componentType) {
             case "street_number": {
                 address1 = `${component.long_name} ${address1}`;
