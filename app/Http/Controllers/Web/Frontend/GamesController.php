@@ -1401,8 +1401,6 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend {
                 'shop_id' => $shop_id
             ]);
 
-            dd("fgggsdfsfs");
-            exit(0);
             $newgames = \VanguardLTE\Game::leftJoin('game_categories', 'game_categories.game_id', '=', 'games.id')
                 ->leftJoin('categories', 'categories.id', '=', 'game_categories.category_id')
                 ->orderBy('games.new_order', 'ASC')
@@ -1782,7 +1780,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend {
                 $api_hotgames = \VanguardLTE\ApiGames::where('label', 'hot')->where('mobile', 0)->orderBy('order', 'ASC')->get();
             }
 
-            if ($apigames_count <= 20) {
+            if ($apigames_count <= 10) {
                 $apigames_loadmore = "nomore";
             } else {
                 $apigames_loadmore = "more";

@@ -7,6 +7,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend {
     use Illuminate\Support\Facades\Log;
     use Illuminate\Http\Client\Response;
     use Illuminate\Http\Client\RequestException;
+    use VanguardLTE\Bonus;
     use VanguardLTE\Transaction;
 
     class PaymentController extends \VanguardLTE\Http\Controllers\Controller
@@ -453,6 +454,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend {
             $email = $request->deposit_email;
             $mobile = $request->deposit_phone;
             $currency = $request->cur_deposit_currency;
+            $bonus = $request->customCheck1;
 
             ini_set('display_errors', 1);
             ini_set('display_startup_errors', 1);
@@ -506,6 +508,13 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend {
             $newItem->ip = $ip;
             $newItem->status = -1;
             $newItem->transaction = $transactionId;
+            // if bounus == 1, don't want to receive any bonus.
+            if ($bonus == "on") {
+                $newItem->bonus = 1;
+            } else {
+                $newItem->bonus = 0;
+            }
+
             $newItem->save();
 
             $data = ['email' => $request->email];
@@ -562,6 +571,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend {
                     $deposit_count = \VanguardLTE\Transaction::where(['user_id' => $user->id, 'type' => 'in'])->count();
                     $user->increment('balance', $amount);
                     $user->increment('count_balance', $amount);
+                    $need_bonus = \VanguardLTE\Transaction::where(['user_id' => $userId, 'transaction' => $transaction])->first();
                     switch ($deposit_count) {
                         case 1:
                             $welcomepackages = \VanguardLTE\WelcomePackage::leftJoin('games', function ($join) {
@@ -602,6 +612,14 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend {
                                     'wager' => $bonus_amount * 70,
                                     'wager_played' => 0
                                 ]);
+                            }
+                            break;
+                        default:
+                            if ($need_bonus->bonus == 0) {
+                                $user->increment('balance', $amount);
+                                $user->increment('count_balance', $amount);
+                                $user->increment('bonus', $amount);
+                                $user->increment('count_bonus', $amount);
                             }
                             break;
                     }

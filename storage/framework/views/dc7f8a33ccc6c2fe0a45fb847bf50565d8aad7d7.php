@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('content'); ?>
     <div class="navigation-sibling">
         <div class="layout-column layout-column-1">
@@ -88,7 +87,7 @@
 
                                                 
                                                 <div class="custom-control custom-checkbox mb-4 any-bonus-style">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck1" name="customCheck1">
                                                     <label class="custom-control-label text-dark p-1" for="customCheck1">I don't want to receive any bonus</label>
                                                 </div>
                                                 
