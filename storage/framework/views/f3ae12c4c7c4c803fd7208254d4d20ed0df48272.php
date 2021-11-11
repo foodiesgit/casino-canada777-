@@ -48,6 +48,9 @@
     <?php echo $__env->yieldContent('page_top'); ?>
 </head>
 <body id="main_body">
+    <?php
+    dd("jhkllllll");
+    ?>
     <?php echo $__env->make('component.frontend.layout.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <main>
     	<?php echo $__env->yieldContent('slider'); ?>

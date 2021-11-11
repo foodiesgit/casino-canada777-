@@ -6,10 +6,10 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
 
     ## Auth verify
 
-	Route::get('login', [
-		'as' => 'frontend.auth.login',
-		'uses' => 'Auth\AuthController@getLogin'
-	]);
+    Route::get('login', [
+        'as' => 'frontend.auth.login',
+        'uses' => 'Auth\AuthController@getLogin'
+    ]);
     Route::post('login', [
         'as' => 'frontend.auth.login.post',
         'uses' => 'Auth\AuthController@postLogin'
@@ -30,9 +30,9 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
         'as' => 'frontend.auth.emailCheck',
         'uses' => 'Auth\AuthController@emailCheck'
     ]);
-    Route::get('launcher/{game}/{token}/{mode}','Auth\AuthController@apiLogin' );
+    Route::get('launcher/{game}/{token}/{mode}', 'Auth\AuthController@apiLogin');
 
-	Route::get('register', [
+    Route::get('register', [
         'as' => 'frontend.register',
         'uses' => 'Auth\AuthController@getRegister'
     ]);
@@ -40,7 +40,7 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
         'as' => 'frontend.register.post',
         'uses' => 'Auth\AuthController@postRegister'
     ]);
-      Route::post('register2', [
+    Route::post('register2', [
         'as' => 'frontend.register2.post',
         'uses' => 'Auth\AuthController@postRegister2'
     ]);
@@ -138,7 +138,7 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
         'uses' => 'PaymentController@callback_cryptopayment'
     ]);
     /* --- */
-	/*
+    /*
     ## license config
 
 	Route::get('new-license', [
@@ -163,7 +163,7 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
     ]);
     */
 
-	/**
+    /**
      * Dashboard
      */
 
@@ -178,7 +178,7 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
         'uses' => 'GamesController@subsession'
     ]);
 
-	/**
+    /**
      * User Profile
      */
     Route::get('profile/info', [
@@ -205,19 +205,19 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
         'as' => 'frontend.profile.activity',
         'uses' => 'ProfileController@activity'
     ]);
-	Route::get('profile/balance', [
+    Route::get('profile/balance', [
         'as' => 'frontend.profile.balance',
         'uses' => 'ProfileController@balance'
     ]);
-	Route::post('profile/balance', [
+    Route::post('profile/balance', [
         'as' => 'frontend.profile.balance.post',
         'uses' => 'ProfileController@balanceAdd'
     ]);
-	Route::get('profile/balance/success', [
+    Route::get('profile/balance/success', [
         'as' => 'frontend.profile.balance.success',
         'uses' => 'ProfileController@success'
     ]);
-	Route::get('profile/balance/fail', [
+    Route::get('profile/balance/fail', [
         'as' => 'frontend.profile.balance.fail',
         'uses' => 'ProfileController@fail'
     ]);
@@ -225,7 +225,7 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
         'as' => 'frontend.profile.update.details',
         'uses' => 'ProfileController@updateDetails'
     ]);
-	Route::post('profile/password/update', [
+    Route::post('profile/password/update', [
         'as' => 'frontend.profile.update.password',
         'uses' => 'ProfileController@updatePassword'
     ]);
@@ -238,7 +238,7 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
         'uses' => 'ProfileController@updateAvatarExternal'
     ]);
 
-	Route::post('profile/exchange', [
+    Route::post('profile/exchange', [
         'as' => 'frontend.profile.exchange',
         'uses' => 'ProfileController@exchange'
     ]);
@@ -264,7 +264,7 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
         'uses' => 'ProfileController@invalidateSession'
     ]);
 
-	Route::get('profile/returns', [
+    Route::get('profile/returns', [
         'as' => 'frontend.profile.returns',
         'uses' => 'ProfileController@returns'
     ]);
@@ -303,7 +303,7 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
         'uses' => 'ProfileController@setlang'
     ]);
 
-	//redesign deposit with color like casino.com
+    //redesign deposit with color like casino.com
     Route::get('profile/deposit', [
         'as' => 'frontend.profile.deposit',
         'uses' => 'ProfileController@deposit'
@@ -312,31 +312,31 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
         'as' => 'frontend.profile.withdraw',
         'uses' => 'ProfileController@withdraw'
     ]);
-	/**
+    /**
      * Games routes
-    */
+     */
 
-	Route::get('/', [
+    Route::get('/', [
         'as' => 'frontend.game.list',
         'uses' => 'GamesController@index'
     ]);
-	Route::get('/search', [
+    Route::get('/search', [
         'as' => 'frontend.game.search',
         'uses' => 'GamesController@search'
     ]);
-	/*
+    /*
 	Route::get('games', [
         'as' => 'frontend.game.list',
         'uses' => 'GamesController@index'
     ]);
 	*/
 
-	Route::get('categories/{category1}', [
+    Route::get('categories/{category1}', [
         'as' => 'frontend.game.list.category',
         'uses' => 'GamesController@index'
     ]);
 
-	Route::get('categories/{category1}/{category2}', [
+    Route::get('categories/{category1}/{category2}', [
         'as' => 'frontend.game.list.category_level2',
         'uses' => 'GamesController@index'
     ]);
@@ -355,11 +355,11 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
         'as' => 'frontend.game.init',
         'uses' => 'GamesController@init'
     ]);
-	Route::post('game/{game}/server', [
+    Route::post('game/{game}/server', [
         'as' => 'frontend.game.server',
         'uses' => 'GamesController@server'
     ]);
-	Route::get('/game_stat', [
+    Route::get('/game_stat', [
         'as' => 'frontend.game_stat',
         'uses' => 'GamesController@game_stat',
     ]);
@@ -389,16 +389,16 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
     /* --- */
 
     /* api for free spin */
-	Route::get('/canada777-up-to-100-free-spin', [
+    Route::get('/canada777-up-to-100-free-spin', [
         'as' => 'frontend.promotions.up_to_100_free_spin',
         'uses' => 'PromotionsController@up_to_100_free_spin',
     ]);
 
     Route::post('/phone_verify', 'Auth\AuthController@phone_verify')->name('phone_verify');
 
-   //Route::post('/phone_verify2', 'Auth\AuthController@phone_verify2')->name('phone_verify2');
+    //Route::post('/phone_verify2', 'Auth\AuthController@phone_verify2')->name('phone_verify2');
 
-Route::post('phone_verify2', [
+    Route::post('phone_verify2', [
         'as' => 'frontend.phone_verify2.post',
         'uses' => 'Auth\AuthController@phone_verify2'
     ]);
@@ -415,11 +415,11 @@ Route::post('phone_verify2', [
         'as' => 'frontend.promotions.welcome_promotion_up_to_100_free_spin',
         'uses' => 'PromotionsController@welcome_up_to_100_free_spin',
     ]);
-	/* --- */
+    /* --- */
 
 
-/* api2 for free spin */
-	Route::get('/canada777-up-to-100-free-spin2', [
+    /* api2 for free spin */
+    Route::get('/canada777-up-to-100-free-spin2', [
         'as' => 'frontend.promotions.up_to_100_free_spin2',
         'uses' => 'PromotionsController@up_to_100_free_spin2',
     ]);
@@ -434,20 +434,18 @@ Route::post('phone_verify2', [
         'as' => 'frontend.promotions.welcome_promotion_up_to_100_free_spin2',
         'uses' => 'PromotionsController@welcome_up_to_100_free_spin2',
     ]);
-	/* --- */
-
-
+    /* --- */
 });
 
 /**
-*
-*
-*
-******************* BACKEND
-*
-*
-*
-*/
+ *
+ *
+ *
+ ******************* BACKEND
+ *
+ *
+ *
+ */
 
 Route::prefix('backend')->group(function () {
     Route::namespace('Backend')->group(function () {
@@ -463,563 +461,563 @@ Route::prefix('backend')->group(function () {
 });
 
 Route::prefix('backend')->middleware(['auth'])->group(function () {
-	Route::namespace('Backend')->group(function () {
+    Route::namespace('Backend')->group(function () {
 
-	Route::get('logout', [
-		'as' => 'backend.auth.logout',
-		'uses' => 'Auth\AuthController@getLogout'
-	]);
+        Route::get('logout', [
+            'as' => 'backend.auth.logout',
+            'uses' => 'Auth\AuthController@getLogout'
+        ]);
 
-    /**
-     * Dashboard
-     */
+        /**
+         * Dashboard
+         */
 
-    Route::get('/search', [
-        'as' => 'backend.search',
-        'uses' => 'DashboardController@search',
-        'middleware' => 'permission:full.search',
-    ]);
+        Route::get('/search', [
+            'as' => 'backend.search',
+            'uses' => 'DashboardController@search',
+            'middleware' => 'permission:full.search',
+        ]);
 
-    Route::get('/', [
-        'as' => 'backend.dashboard',
-        'uses' => 'DashboardController@index',
-    ]);
-	Route::get('/game_stat', [
-        'as' => 'backend.game_stat',
-        'uses' => 'DashboardController@game_stat',
-        'middleware' => 'permission:stats.game',
-    ]);
-	Route::delete('/game_stat/clear', [
-        'as' => 'backend.game_stat.clear',
-        'uses' => 'DashboardController@game_stat_clear'
-    ]);
-	Route::get('/bank_stat', [
-        'as' => 'backend.bank_stat',
-        'uses' => 'DashboardController@bank_stat',
-        'middleware' => 'permission:stats.bank',
-    ]);
-	Route::get('/shop_stat', [
-        'as' => 'backend.shop_stat',
-        'uses' => 'DashboardController@shop_stat',
-        'middleware' => 'permission:stats.shop',
-    ]);
-	Route::get('/shift_stat', [
-        'as' => 'backend.shift_stat',
-        'uses' => 'DashboardController@shift_stat',
-        'middleware' => 'permission:stats.shift',
-    ]);
-	Route::get('/live', [
-        'as' => 'backend.live_stat',
-        'uses' => 'DashboardController@live_stat',
-        'middleware' => 'permission:stats.live',
-    ]);
+        Route::get('/', [
+            'as' => 'backend.dashboard',
+            'uses' => 'DashboardController@index',
+        ]);
+        Route::get('/game_stat', [
+            'as' => 'backend.game_stat',
+            'uses' => 'DashboardController@game_stat',
+            'middleware' => 'permission:stats.game',
+        ]);
+        Route::delete('/game_stat/clear', [
+            'as' => 'backend.game_stat.clear',
+            'uses' => 'DashboardController@game_stat_clear'
+        ]);
+        Route::get('/bank_stat', [
+            'as' => 'backend.bank_stat',
+            'uses' => 'DashboardController@bank_stat',
+            'middleware' => 'permission:stats.bank',
+        ]);
+        Route::get('/shop_stat', [
+            'as' => 'backend.shop_stat',
+            'uses' => 'DashboardController@shop_stat',
+            'middleware' => 'permission:stats.shop',
+        ]);
+        Route::get('/shift_stat', [
+            'as' => 'backend.shift_stat',
+            'uses' => 'DashboardController@shift_stat',
+            'middleware' => 'permission:stats.shift',
+        ]);
+        Route::get('/live', [
+            'as' => 'backend.live_stat',
+            'uses' => 'DashboardController@live_stat',
+            'middleware' => 'permission:stats.live',
+        ]);
 
-	Route::get('/start_shift', [
-        'as' => 'backend.start_shift',
-        'uses' => 'DashboardController@start_shift'
-    ]);
+        Route::get('/start_shift', [
+            'as' => 'backend.start_shift',
+            'uses' => 'DashboardController@start_shift'
+        ]);
 
-    ##Country Manage
+        ##Country Manage
 
-    Route::get('/country', [
-        'as' => 'backend.country',
-        'uses' => 'UsersController@country',
-        'middleware' => 'permission:country.manage'
-    ]);
-
-
-    Route::get('/currency', [
-        'as' => 'backend.currency',
-        'uses' => 'UsersController@country',
-        'middleware' => 'permission:currency.manage'
-    ]);
-
-    /* withdraw section */
-    Route::get('/withdraw', [
-        'as' => 'backend.withdraw.list',
-        'uses' => 'WithDrawController@index',
-        'middleware' => 'permission:withdraw.manage'
-    ]);
-
-    Route::match(['get','post'], '/withdraw/approve/{id}', [
-        'as' => 'backend.withdraw.approve',
-        'uses' => 'WithDrawController@approve',
-        'middleware' => 'permission:withdraw.manage'
-    ]);
-    Route::match(['get','post'], '/withdraw/reject/{id}', [
-        'as' => 'backend.withdraw.reject',
-        'uses' => 'WithDrawController@reject',
-        'middleware' => 'permission:withdraw.manage'
-    ]);
-
-    Route::match(['get','post'], '/crypto_withdraw/approve/{id}', [
-        'as' => 'backend.crypto_withdraw.approve',
-        'uses' => 'WithDrawController@crypto_approve',
-        'middleware' => 'permission:withdraw.manage'
-    ]);
-
-    Route::match(['get','post'], '/crypto_withdraw/reject/{id}', [
-        'as' => 'backend.crypto_withdraw.reject',
-        'uses' => 'WithDrawController@crypto_reject',
-        'middleware' => 'permission:withdraw.manage'
-    ]);
+        Route::get('/country', [
+            'as' => 'backend.country',
+            'uses' => 'UsersController@country',
+            'middleware' => 'permission:country.manage'
+        ]);
 
 
-    /* --- */
+        Route::get('/currency', [
+            'as' => 'backend.currency',
+            'uses' => 'UsersController@country',
+            'middleware' => 'permission:currency.manage'
+        ]);
 
-    /**
-    * User Profile
-    **/
+        /* withdraw section */
+        Route::get('/withdraw', [
+            'as' => 'backend.withdraw.list',
+            'uses' => 'WithDrawController@index',
+            'middleware' => 'permission:withdraw.manage'
+        ]);
 
-    Route::get('profile', [
-        'as' => 'backend.profile',
-        'uses' => 'ProfileController@index'
-    ]);
-    Route::get('profile/activity', [
-        'as' => 'backend.profile.activity',
-        'uses' => 'ProfileController@activity'
-    ]);
-    Route::put('profile/details/update', [
-        'as' => 'backend.profile.update.details',
-        'uses' => 'ProfileController@updateDetails'
-    ]);
-    Route::post('profile/avatar/update', [
-        'as' => 'backend.profile.update.avatar',
-        'uses' => 'ProfileController@updateAvatar'
-    ]);
-    Route::post('profile/avatar/update/external', [
-        'as' => 'backend.profile.update.avatar-external',
-        'uses' => 'ProfileController@updateAvatarExternal'
-    ]);
-    Route::put('profile/login-details/update', [
-        'as' => 'backend.profile.update.login-details',
-        'uses' => 'ProfileController@updateLoginDetails'
-    ]);
-    Route::post('profile/two-factor/enable', [
-        'as' => 'backend.profile.two-factor.enable',
-        'uses' => 'ProfileController@enableTwoFactorAuth'
-    ]);
-    Route::post('profile/two-factor/disable', [
-        'as' => 'backend.profile.two-factor.disable',
-        'uses' => 'ProfileController@disableTwoFactorAuth'
-    ]);
-    Route::get('profile/sessions', [
-        'as' => 'backend.profile.sessions',
-        'uses' => 'ProfileController@sessions'
-    ]);
-    Route::delete('profile/sessions/{session}/invalidate', [
-        'as' => 'backend.profile.sessions.invalidate',
-        'uses' => 'ProfileController@invalidateSession'
-    ]);
-	Route::match(['get','post'], 'profile/setshop', [
-        'as' => 'backend.profile.setshop',
-        'uses' => 'ProfileController@setshop'
-    ]);
+        Route::match(['get', 'post'], '/withdraw/approve/{id}', [
+            'as' => 'backend.withdraw.approve',
+            'uses' => 'WithDrawController@approve',
+            'middleware' => 'permission:withdraw.manage'
+        ]);
+        Route::match(['get', 'post'], '/withdraw/reject/{id}', [
+            'as' => 'backend.withdraw.reject',
+            'uses' => 'WithDrawController@reject',
+            'middleware' => 'permission:withdraw.manage'
+        ]);
 
-    /**
-     * User Management
-    */
+        Route::match(['get', 'post'], '/crypto_withdraw/approve/{id}', [
+            'as' => 'backend.crypto_withdraw.approve',
+            'uses' => 'WithDrawController@crypto_approve',
+            'middleware' => 'permission:withdraw.manage'
+        ]);
 
-    Route::get('user', [
-        'as' => 'backend.user.list',
-        'uses' => 'UsersController@index',
-        'middleware' => 'permission:users.manage'
-    ]);
-    Route::get('tree', [
-        'as' => 'backend.user.tree',
-        'uses' => 'UsersController@tree',
-        'middleware' => 'permission:users.tree'
-    ]);
-    Route::get('statistics', [
-        'as' => 'backend.statistics',
-        'uses' => 'DashboardController@statistics',
-        'middleware' => 'permission:stats.pay',
-    ]);
-	Route::post('profile/balance/update', [
-        'uses' => 'UsersController@updateBalance',
-		'as' => 'backend.user.balance.update',
-		'middleware' => 'permission:users.balance.manage'
-    ]);
-    Route::post('profile/balance/update/manually', [
-        'uses' => 'UsersController@updateBalanceManually',
-        'as' => 'backend.user.balance.update.manually',
-        'middleware' => 'permission:users.balance.manage'
-    ]);
-    Route::get('user/create', [
-        'as' => 'backend.user.create',
-        'uses' => 'UsersController@create',
-        'middleware' => 'permission:users.add'
-    ]);
-    Route::post('user/create', [
-        'as' => 'backend.user.store',
-        'uses' => 'UsersController@store',
-        'middleware' => 'permission:users.add'
-    ]);
-	Route::get('user/{user}/stat', [
-        'as' => 'backend.user.stat',
-        'uses' => 'UsersController@statistics'
-    ]);
-    Route::post('user/mass', [
-        'as' => 'backend.user.massadd',
-        'uses' => 'UsersController@massadd',
-        'middleware' => 'permission:users.add'
-    ]);
-    Route::get('user/{user}/show', [
-        'as' => 'backend.user.show',
-        'uses' => 'UsersController@view'
-    ]);
-    Route::get('user/{user}/profile', [
-        'as' => 'backend.user.edit',
-        'uses' => 'UsersController@edit'
-    ]);
-    Route::put('user/{user}/update/details', [
-        'as' => 'backend.user.update.details',
-        'uses' => 'UsersController@updateDetails'
-    ]);
-    Route::put('user/{user}/update/verify', [
-        'as' => 'backend.user.update.verify',
-        'uses' => 'UsersController@updateVerify'
-    ]);
-    Route::put('user/{user}/update/login-details', [
-        'as' => 'backend.user.update.login-details',
-        'uses' => 'UsersController@updateLoginDetails'
-    ]);
-    Route::delete('user/{user}/delete', [
-        'as' => 'backend.user.delete',
-        'uses' => 'UsersController@delete',
-		'middleware' => 'permission:users.delete'
-    ]);
-    Route::delete('user/{user}/hard_delete', [
-        'as' => 'backend.user.hard_delete',
-        'uses' => 'UsersController@hard_delete',
-        'middleware' => 'permission:users.delete'
-    ]);
-    Route::post('user/{user}/update/avatar', [
-        'as' => 'backend.user.update.avatar',
-        'uses' => 'UsersController@updateAvatar'
-    ]);
-    Route::post('user/{user}/update/avatar/external', [
-        'as' => 'backend.user.update.avatar.external',
-        'uses' => 'UsersController@updateAvatarExternal'
-    ]);
-    Route::post('user/{user}/update/deposit-amount', [
-        'as' => 'backend.user.update.deposit-amount',
-        'uses' => 'UsersController@updateDepositAmount'
-    ]);
-    Route::get('user/{user}/sessions', [
-        'as' => 'backend.user.sessions',
-        'uses' => 'UsersController@sessions'
-    ]);
-    Route::delete('user/{user}/sessions/{session}/invalidate', [
-        'as' => 'backend.user.sessions.invalidate',
-        'uses' => 'UsersController@invalidateSession'
-    ]);
-    Route::post('user/{user}/two-factor/enable', [
-        'as' => 'backend.user.two-factor.enable',
-        'uses' => 'UsersController@enableTwoFactorAuth'
-    ]);
-    Route::post('user/{user}/two-factor/disable', [
-        'as' => 'backend.user.two-factor.disable',
-        'uses' => 'UsersController@disableTwoFactorAuth'
-    ]);
+        Route::match(['get', 'post'], '/crypto_withdraw/reject/{id}', [
+            'as' => 'backend.crypto_withdraw.reject',
+            'uses' => 'WithDrawController@crypto_reject',
+            'middleware' => 'permission:withdraw.manage'
+        ]);
+
+
+        /* --- */
+
+        /**
+         * User Profile
+         **/
+
+        Route::get('profile', [
+            'as' => 'backend.profile',
+            'uses' => 'ProfileController@index'
+        ]);
+        Route::get('profile/activity', [
+            'as' => 'backend.profile.activity',
+            'uses' => 'ProfileController@activity'
+        ]);
+        Route::put('profile/details/update', [
+            'as' => 'backend.profile.update.details',
+            'uses' => 'ProfileController@updateDetails'
+        ]);
+        Route::post('profile/avatar/update', [
+            'as' => 'backend.profile.update.avatar',
+            'uses' => 'ProfileController@updateAvatar'
+        ]);
+        Route::post('profile/avatar/update/external', [
+            'as' => 'backend.profile.update.avatar-external',
+            'uses' => 'ProfileController@updateAvatarExternal'
+        ]);
+        Route::put('profile/login-details/update', [
+            'as' => 'backend.profile.update.login-details',
+            'uses' => 'ProfileController@updateLoginDetails'
+        ]);
+        Route::post('profile/two-factor/enable', [
+            'as' => 'backend.profile.two-factor.enable',
+            'uses' => 'ProfileController@enableTwoFactorAuth'
+        ]);
+        Route::post('profile/two-factor/disable', [
+            'as' => 'backend.profile.two-factor.disable',
+            'uses' => 'ProfileController@disableTwoFactorAuth'
+        ]);
+        Route::get('profile/sessions', [
+            'as' => 'backend.profile.sessions',
+            'uses' => 'ProfileController@sessions'
+        ]);
+        Route::delete('profile/sessions/{session}/invalidate', [
+            'as' => 'backend.profile.sessions.invalidate',
+            'uses' => 'ProfileController@invalidateSession'
+        ]);
+        Route::match(['get', 'post'], 'profile/setshop', [
+            'as' => 'backend.profile.setshop',
+            'uses' => 'ProfileController@setshop'
+        ]);
+
+        /**
+         * User Management
+         */
+
+        Route::get('user', [
+            'as' => 'backend.user.list',
+            'uses' => 'UsersController@index',
+            'middleware' => 'permission:users.manage'
+        ]);
+        Route::get('tree', [
+            'as' => 'backend.user.tree',
+            'uses' => 'UsersController@tree',
+            'middleware' => 'permission:users.tree'
+        ]);
+        Route::get('statistics', [
+            'as' => 'backend.statistics',
+            'uses' => 'DashboardController@statistics',
+            'middleware' => 'permission:stats.pay',
+        ]);
+        Route::post('profile/balance/update', [
+            'uses' => 'UsersController@updateBalance',
+            'as' => 'backend.user.balance.update',
+            'middleware' => 'permission:users.balance.manage'
+        ]);
+        Route::post('profile/balance/update/manually', [
+            'uses' => 'UsersController@updateBalanceManually',
+            'as' => 'backend.user.balance.update.manually',
+            'middleware' => 'permission:users.balance.manage'
+        ]);
+        Route::get('user/create', [
+            'as' => 'backend.user.create',
+            'uses' => 'UsersController@create',
+            'middleware' => 'permission:users.add'
+        ]);
+        Route::post('user/create', [
+            'as' => 'backend.user.store',
+            'uses' => 'UsersController@store',
+            'middleware' => 'permission:users.add'
+        ]);
+        Route::get('user/{user}/stat', [
+            'as' => 'backend.user.stat',
+            'uses' => 'UsersController@statistics'
+        ]);
+        Route::post('user/mass', [
+            'as' => 'backend.user.massadd',
+            'uses' => 'UsersController@massadd',
+            'middleware' => 'permission:users.add'
+        ]);
+        Route::get('user/{user}/show', [
+            'as' => 'backend.user.show',
+            'uses' => 'UsersController@view'
+        ]);
+        Route::get('user/{user}/profile', [
+            'as' => 'backend.user.edit',
+            'uses' => 'UsersController@edit'
+        ]);
+        Route::put('user/{user}/update/details', [
+            'as' => 'backend.user.update.details',
+            'uses' => 'UsersController@updateDetails'
+        ]);
+        Route::put('user/{user}/update/verify', [
+            'as' => 'backend.user.update.verify',
+            'uses' => 'UsersController@updateVerify'
+        ]);
+        Route::put('user/{user}/update/login-details', [
+            'as' => 'backend.user.update.login-details',
+            'uses' => 'UsersController@updateLoginDetails'
+        ]);
+        Route::delete('user/{user}/delete', [
+            'as' => 'backend.user.delete',
+            'uses' => 'UsersController@delete',
+            'middleware' => 'permission:users.delete'
+        ]);
+        Route::delete('user/{user}/hard_delete', [
+            'as' => 'backend.user.hard_delete',
+            'uses' => 'UsersController@hard_delete',
+            'middleware' => 'permission:users.delete'
+        ]);
+        Route::post('user/{user}/update/avatar', [
+            'as' => 'backend.user.update.avatar',
+            'uses' => 'UsersController@updateAvatar'
+        ]);
+        Route::post('user/{user}/update/avatar/external', [
+            'as' => 'backend.user.update.avatar.external',
+            'uses' => 'UsersController@updateAvatarExternal'
+        ]);
+        Route::post('user/{user}/update/deposit-amount', [
+            'as' => 'backend.user.update.deposit-amount',
+            'uses' => 'UsersController@updateDepositAmount'
+        ]);
+        Route::get('user/{user}/sessions', [
+            'as' => 'backend.user.sessions',
+            'uses' => 'UsersController@sessions'
+        ]);
+        Route::delete('user/{user}/sessions/{session}/invalidate', [
+            'as' => 'backend.user.sessions.invalidate',
+            'uses' => 'UsersController@invalidateSession'
+        ]);
+        Route::post('user/{user}/two-factor/enable', [
+            'as' => 'backend.user.two-factor.enable',
+            'uses' => 'UsersController@enableTwoFactorAuth'
+        ]);
+        Route::post('user/{user}/two-factor/disable', [
+            'as' => 'backend.user.two-factor.disable',
+            'uses' => 'UsersController@disableTwoFactorAuth'
+        ]);
 
         Route::delete('user/action/{action}', [
             'as' => 'backend.user.action',
             'uses' => 'UsersController@action',
         ]);
 
-    /* Notifications */
-    Route::get('notifications', [
-        'as' => 'backend.notifications.list',
-        'uses' => 'NotificationsController@index',
-        'middleware' => 'permission:notifications.manage'
-    ]);
-    Route::match(['get', 'post'], 'notifications/add', [
-        'as' => 'backend.notifications.add',
-        'uses' => 'NotificationsController@add',
-        'middleware' => 'permission:notifications.manage'
-    ]);
-    Route::match(['get', 'post'], 'notifications/edit/{id}', [
-        'as' => 'backend.notifications.edit',
-        'uses' => 'NotificationsController@edit',
-        'middleware' => 'permission:notifications.manage'
-    ]);
-    Route::get('notifications/delete/{id}', [
-        'as' => 'backend.notifications.delete',
-        'uses' => 'NotificationsController@delete',
-        'middleware' => 'permission:notifications.manage'
-    ]);
-    /* --- */
+        /* Notifications */
+        Route::get('notifications', [
+            'as' => 'backend.notifications.list',
+            'uses' => 'NotificationsController@index',
+            'middleware' => 'permission:notifications.manage'
+        ]);
+        Route::match(['get', 'post'], 'notifications/add', [
+            'as' => 'backend.notifications.add',
+            'uses' => 'NotificationsController@add',
+            'middleware' => 'permission:notifications.manage'
+        ]);
+        Route::match(['get', 'post'], 'notifications/edit/{id}', [
+            'as' => 'backend.notifications.edit',
+            'uses' => 'NotificationsController@edit',
+            'middleware' => 'permission:notifications.manage'
+        ]);
+        Route::get('notifications/delete/{id}', [
+            'as' => 'backend.notifications.delete',
+            'uses' => 'NotificationsController@delete',
+            'middleware' => 'permission:notifications.manage'
+        ]);
+        /* --- */
 
-    /* automizy service */
-    Route::get('/automizy/create_list', [
-        'as' => 'backend.automizy.create_list',
-        'uses' => 'AutomizyController@create_list',
-        'middleware' => 'permission:automizy.manage'
-    ]);
+        /* automizy service */
+        Route::get('/automizy/create_list', [
+            'as' => 'backend.automizy.create_list',
+            'uses' => 'AutomizyController@create_list',
+            'middleware' => 'permission:automizy.manage'
+        ]);
 
-    Route::get('/automizy/list', [
-        'as' => 'backend.automizy.list',
-        'uses' => 'AutomizyController@index',
-        'middleware' => 'permission:automizy.manage'
-    ]);
-    Route::match(['get', 'post'], '/automizy/add_list', [
-        'as' => 'backend.automizy.add_list',
-        'uses' => 'AutomizyController@add_list',
-        'middleware' => 'permission:automizy.manage'
-    ]);
-    Route::match(['get', 'post'], '/automizy/edit_list/{id}', [
-        'as' => 'backend.automizy.edit_list',
-        'uses' => 'AutomizyController@edit_list',
-        'middleware' => 'permission:automizy.manage'
-    ]);
-    Route::get('/automizy/delete_list/{id}', [
-        'as' => 'backend.automizy.delete_list',
-        'uses' => 'AutomizyController@delete_list',
-        'middleware' => 'permission:automizy.manage'
-    ]);
-    Route::get('/automizy/add_contacts/{id}/{email}', [
-        'as' => 'backend.automizy.add_contacts',
-        'uses' => 'AutomizyController@add_contacts',
-        'middleware' => 'permission:automizy.manage'
-    ]);
-    // Route::match(['get', 'post'], '/automizy/delete_contacts/{id}/{contact}', [
-    //     'as' => 'backend.automizy.delete_contacts',
-    //     'uses' => 'AutomizyController@delete_contacts',
-    //     'middleware' => 'permission:automizy.manage'
-    // ]);
-    /* --- */
+        Route::get('/automizy/list', [
+            'as' => 'backend.automizy.list',
+            'uses' => 'AutomizyController@index',
+            'middleware' => 'permission:automizy.manage'
+        ]);
+        Route::match(['get', 'post'], '/automizy/add_list', [
+            'as' => 'backend.automizy.add_list',
+            'uses' => 'AutomizyController@add_list',
+            'middleware' => 'permission:automizy.manage'
+        ]);
+        Route::match(['get', 'post'], '/automizy/edit_list/{id}', [
+            'as' => 'backend.automizy.edit_list',
+            'uses' => 'AutomizyController@edit_list',
+            'middleware' => 'permission:automizy.manage'
+        ]);
+        Route::get('/automizy/delete_list/{id}', [
+            'as' => 'backend.automizy.delete_list',
+            'uses' => 'AutomizyController@delete_list',
+            'middleware' => 'permission:automizy.manage'
+        ]);
+        Route::get('/automizy/add_contacts/{id}/{email}', [
+            'as' => 'backend.automizy.add_contacts',
+            'uses' => 'AutomizyController@add_contacts',
+            'middleware' => 'permission:automizy.manage'
+        ]);
+        // Route::match(['get', 'post'], '/automizy/delete_contacts/{id}/{contact}', [
+        //     'as' => 'backend.automizy.delete_contacts',
+        //     'uses' => 'AutomizyController@delete_contacts',
+        //     'middleware' => 'permission:automizy.manage'
+        // ]);
+        /* --- */
 
-	/**
-     * Games routes
-    */
+        /**
+         * Games routes
+         */
 
-	Route::get('game', [
-        'as' => 'backend.game.list',
-        'uses' => 'GamesController@index',
-        'middleware' => 'permission:games.manage'
-    ]);
-	Route::get('games.json', [
-        'as' => 'backend.game.list.json',
-        'uses' => 'GamesController@index_json'
-    ]);
-    Route::get('game/create', [
-        'as' => 'backend.game.create',
-        'uses' => 'GamesController@create',
-        'middleware' => 'permission:games.add'
-    ]);
-    Route::post('game/create', [
-        'as' => 'backend.game.store',
-        'uses' => 'GamesController@store',
-        'middleware' => 'permission:games.add'
-    ]);
-    Route::get('game/{game}/show', [
-        'as' => 'backend.game.show',
-        'uses' => 'GamesController@view',
-    ]);
-	Route::get('game/{game}', [
-        'as' => 'backend.game.go',
-        'uses' => 'GamesController@go'
-    ]);
-	Route::post('/game/{game}/server', [
-        'as' => 'backend.game.server',
-        'uses' => 'GamesController@server'
-    ]);
-    Route::get('game/{game}/edit', [
-        'as' => 'backend.game.edit',
-        'uses' => 'GamesController@edit',
-        'middleware' => 'permission:games.edit'
-    ]);
-    Route::get('game/{apigame}/apiedit', [
-        'as' => 'backend.game.apiedit',
-        'uses' => 'GamesController@apiedit',
-        'middleware' => 'permission:games.edit'
-    ]);
-	Route::post('game/{game}/update', [
-        'as' => 'backend.game.update',
-        'uses' => 'GamesController@update',
-    ]);
-	Route::post('game/{apigame}/apiupdate', [
-        'as' => 'backend.game.apiupdate',
-        'uses' => 'GamesController@apiupdate',
-    ]);
-    Route::delete('game/{game}/delete', [
-        'as' => 'backend.game.delete',
-        'uses' => 'GamesController@delete',
-        'middleware' => 'permission:games.delete'
-    ]);
-	Route::post('game/categories', [
-        'as' => 'backend.game.categories',
-        'uses' => 'GamesController@categories',
-    ]);
-    Route::post('game/update/mass', [
-        'as' => 'backend.game.mass',
-        'uses' => 'GamesController@mass',
-        'middleware' => 'permission:games.edit'
-    ]);
-    Route::post('game/orderupdate', [
-        'as' => 'backend.game.orderupdate',
-        'uses' => 'GamesController@orderupdate'
-    ]);
+        Route::get('game', [
+            'as' => 'backend.game.list',
+            'uses' => 'GamesController@index',
+            'middleware' => 'permission:games.manage'
+        ]);
+        Route::get('games.json', [
+            'as' => 'backend.game.list.json',
+            'uses' => 'GamesController@index_json'
+        ]);
+        Route::get('game/create', [
+            'as' => 'backend.game.create',
+            'uses' => 'GamesController@create',
+            'middleware' => 'permission:games.add'
+        ]);
+        Route::post('game/create', [
+            'as' => 'backend.game.store',
+            'uses' => 'GamesController@store',
+            'middleware' => 'permission:games.add'
+        ]);
+        Route::get('game/{game}/show', [
+            'as' => 'backend.game.show',
+            'uses' => 'GamesController@view',
+        ]);
+        Route::get('game/{game}', [
+            'as' => 'backend.game.go',
+            'uses' => 'GamesController@go'
+        ]);
+        Route::post('/game/{game}/server', [
+            'as' => 'backend.game.server',
+            'uses' => 'GamesController@server'
+        ]);
+        Route::get('game/{game}/edit', [
+            'as' => 'backend.game.edit',
+            'uses' => 'GamesController@edit',
+            'middleware' => 'permission:games.edit'
+        ]);
+        Route::get('game/{apigame}/apiedit', [
+            'as' => 'backend.game.apiedit',
+            'uses' => 'GamesController@apiedit',
+            'middleware' => 'permission:games.edit'
+        ]);
+        Route::post('game/{game}/update', [
+            'as' => 'backend.game.update',
+            'uses' => 'GamesController@update',
+        ]);
+        Route::post('game/{apigame}/apiupdate', [
+            'as' => 'backend.game.apiupdate',
+            'uses' => 'GamesController@apiupdate',
+        ]);
+        Route::delete('game/{game}/delete', [
+            'as' => 'backend.game.delete',
+            'uses' => 'GamesController@delete',
+            'middleware' => 'permission:games.delete'
+        ]);
+        Route::post('game/categories', [
+            'as' => 'backend.game.categories',
+            'uses' => 'GamesController@categories',
+        ]);
+        Route::post('game/update/mass', [
+            'as' => 'backend.game.mass',
+            'uses' => 'GamesController@mass',
+            'middleware' => 'permission:games.edit'
+        ]);
+        Route::post('game/orderupdate', [
+            'as' => 'backend.game.orderupdate',
+            'uses' => 'GamesController@orderupdate'
+        ]);
 
 
-    Route::post('gamebanks_add', [
-       'as' => 'backend.game.gamebanks_add',
-        'uses' => 'GamesController@gamebanks_add',
-    ]);
-    Route::get('gamebanks_clear', [
-        'as' => 'backend.game.gamebanks_clear',
-        'uses' => 'GamesController@gamebanks_clear',
-    ]);
+        Route::post('gamebanks_add', [
+            'as' => 'backend.game.gamebanks_add',
+            'uses' => 'GamesController@gamebanks_add',
+        ]);
+        Route::get('gamebanks_clear', [
+            'as' => 'backend.game.gamebanks_clear',
+            'uses' => 'GamesController@gamebanks_clear',
+        ]);
 
-/**
-     * Bonus routes
-    */
+        /**
+         * Bonus routes
+         */
 
-	Route::get('bonus', [
-        'as' => 'backend.bonus.list',
-        'uses' => 'BonusController@index',
-        'middleware' => 'permission:bonus.manage'
-    ]);
-    Route::match(['get', 'post'], 'bonus/add', [
-        'as' => 'backend.bonus.add',
-        'uses' => 'BonusController@add',
-        'middleware' => 'permission:bonus.manage'
-    ]);
-    Route::match(['get', 'post'], 'bonus/edit/{id}', [
-        'as' => 'backend.bonus.edit',
-        'uses' => 'BonusController@edit',
-        'middleware' => 'permission:bonus.manage'
-    ]);
-    Route::get('bonus/delete/{id}', [
-        'as' => 'backend.bonus.delete',
-        'uses' => 'BonusController@delete',
-        'middleware' => 'permission:bonus.manage'
-    ]);
+        Route::get('bonus', [
+            'as' => 'backend.bonus.list',
+            'uses' => 'BonusController@index',
+            'middleware' => 'permission:bonus.manage'
+        ]);
+        Route::match(['get', 'post'], 'bonus/add', [
+            'as' => 'backend.bonus.add',
+            'uses' => 'BonusController@add',
+            'middleware' => 'permission:bonus.manage'
+        ]);
+        Route::match(['get', 'post'], 'bonus/edit/{id}', [
+            'as' => 'backend.bonus.edit',
+            'uses' => 'BonusController@edit',
+            'middleware' => 'permission:bonus.manage'
+        ]);
+        Route::get('bonus/delete/{id}', [
+            'as' => 'backend.bonus.delete',
+            'uses' => 'BonusController@delete',
+            'middleware' => 'permission:bonus.manage'
+        ]);
 
-    /* freespin round */
-    Route::get('freespinround', [
-        'as' => 'backend.freespinround.list',
-        'uses' => 'FreespinroundController@index',
-        'middleware' => 'permission:freespinround.manage'
-    ]);
-    Route::match(['get', 'post'], 'freespinround/add', [
-        'as' => 'backend.freespinround.add',
-        'uses' => 'FreespinroundController@add',
-        'middleware' => 'permission:freespinround.manage'
-    ]);
-    Route::match(['get', 'post'], 'freespinround/edit/{id}', [
-        'as' => 'backend.freespinround.edit',
-        'uses' => 'FreespinroundController@edit',
-        'middleware' => 'permission:freespinround.manage'
-    ]);
-    Route::get('freespinround/delete/{id}', [
-        'as' => 'backend.freespinround.delete',
-        'uses' => 'FreespinroundController@delete',
-        'middleware' => 'permission:freespinround.manage'
-    ]);
-    /* --- */
-    /* free play user */
-    Route::get('freeplay', [
-        'as' => 'backend.freeplay.list',
-        'uses' => 'FreeplayController@index',
-        'middleware' => 'permission:freespinround.manage'
-    ]);
-    /* --- */
-    /**
-     * Categories routes
-     */
+        /* freespin round */
+        Route::get('freespinround', [
+            'as' => 'backend.freespinround.list',
+            'uses' => 'FreespinroundController@index',
+            'middleware' => 'permission:freespinround.manage'
+        ]);
+        Route::match(['get', 'post'], 'freespinround/add', [
+            'as' => 'backend.freespinround.add',
+            'uses' => 'FreespinroundController@add',
+            'middleware' => 'permission:freespinround.manage'
+        ]);
+        Route::match(['get', 'post'], 'freespinround/edit/{id}', [
+            'as' => 'backend.freespinround.edit',
+            'uses' => 'FreespinroundController@edit',
+            'middleware' => 'permission:freespinround.manage'
+        ]);
+        Route::get('freespinround/delete/{id}', [
+            'as' => 'backend.freespinround.delete',
+            'uses' => 'FreespinroundController@delete',
+            'middleware' => 'permission:freespinround.manage'
+        ]);
+        /* --- */
+        /* free play user */
+        Route::get('freeplay', [
+            'as' => 'backend.freeplay.list',
+            'uses' => 'FreeplayController@index',
+            'middleware' => 'permission:freespinround.manage'
+        ]);
+        /* --- */
+        /**
+         * Categories routes
+         */
 
-	Route::get('category', [
-        'as' => 'backend.category.list',
-        'uses' => 'CategoriesController@index',
-        'middleware' => 'permission:categories.manage'
-    ]);
-    Route::get('category/create', [
-        'as' => 'backend.category.create',
-        'uses' => 'CategoriesController@create',
-        'middleware' => 'permission:categories.add'
-    ]);
-    Route::post('category/create', [
-        'as' => 'backend.category.store',
-        'uses' => 'CategoriesController@store',
-        'middleware' => 'permission:categories.add'
-    ]);
-    Route::get('category/{category}/edit', [
-        'as' => 'backend.category.edit',
-        'uses' => 'CategoriesController@edit',
-    ]);
-	Route::post('category/{category}/update', [
-        'as' => 'backend.category.update',
-        'uses' => 'CategoriesController@update',
-    ]);
-	Route::delete('category/{category}/delete', [
-        'as' => 'backend.category.delete',
-        'uses' => 'CategoriesController@delete',
-        'middleware' => 'permission:categories.delete'
-    ]);
+        Route::get('category', [
+            'as' => 'backend.category.list',
+            'uses' => 'CategoriesController@index',
+            'middleware' => 'permission:categories.manage'
+        ]);
+        Route::get('category/create', [
+            'as' => 'backend.category.create',
+            'uses' => 'CategoriesController@create',
+            'middleware' => 'permission:categories.add'
+        ]);
+        Route::post('category/create', [
+            'as' => 'backend.category.store',
+            'uses' => 'CategoriesController@store',
+            'middleware' => 'permission:categories.add'
+        ]);
+        Route::get('category/{category}/edit', [
+            'as' => 'backend.category.edit',
+            'uses' => 'CategoriesController@edit',
+        ]);
+        Route::post('category/{category}/update', [
+            'as' => 'backend.category.update',
+            'uses' => 'CategoriesController@update',
+        ]);
+        Route::delete('category/{category}/delete', [
+            'as' => 'backend.category.delete',
+            'uses' => 'CategoriesController@delete',
+            'middleware' => 'permission:categories.delete'
+        ]);
 
-	/**
-     * Categories routes
-     */
+        /**
+         * Categories routes
+         */
 
-	Route::get('shops', [
-        'as' => 'backend.shop.list',
-        'uses' => 'ShopsController@index',
-        'middleware' => 'permission:shops.manage'
-    ]);
-    Route::get('shops/create', [
-        'as' => 'backend.shop.create',
-        'uses' => 'ShopsController@create',
-        'middleware' => 'permission:shops.manage'
-    ]);
-    Route::post('shops/create', [
-        'as' => 'backend.shop.store',
-        'uses' => 'ShopsController@store',
-        'middleware' => 'permission:shops.manage'
-    ]);
+        Route::get('shops', [
+            'as' => 'backend.shop.list',
+            'uses' => 'ShopsController@index',
+            'middleware' => 'permission:shops.manage'
+        ]);
+        Route::get('shops/create', [
+            'as' => 'backend.shop.create',
+            'uses' => 'ShopsController@create',
+            'middleware' => 'permission:shops.manage'
+        ]);
+        Route::post('shops/create', [
+            'as' => 'backend.shop.store',
+            'uses' => 'ShopsController@store',
+            'middleware' => 'permission:shops.manage'
+        ]);
 
-    Route::get('shops/admin/create', [
-        'as' => 'backend.shop.admin_create',
-        'uses' => 'ShopsController@admin_create',
-        'middleware' => 'permission:shops.manage'
-    ]);
-    Route::post('shops/admin/create', [
-        'as' => 'backend.shop.admin_store',
-        'uses' => 'ShopsController@admin_store',
-        'middleware' => 'permission:shops.manage'
-    ]);
+        Route::get('shops/admin/create', [
+            'as' => 'backend.shop.admin_create',
+            'uses' => 'ShopsController@admin_create',
+            'middleware' => 'permission:shops.manage'
+        ]);
+        Route::post('shops/admin/create', [
+            'as' => 'backend.shop.admin_store',
+            'uses' => 'ShopsController@admin_store',
+            'middleware' => 'permission:shops.manage'
+        ]);
 
-    Route::get('shops/{shop}/edit', [
-        'as' => 'backend.shop.edit',
-        'uses' => 'ShopsController@edit',
-        'middleware' => 'permission:shops.manage'
-    ]);
-	Route::post('shops/{shop}/update', [
-        'as' => 'backend.shop.update',
-        'uses' => 'ShopsController@update',
-        'middleware' => 'permission:shops.manage'
-    ]);
-	Route::post('shops/balance', [
-        'as' => 'backend.shop.balance',
-        'uses' => 'ShopsController@balance',
-        'middleware' => 'permission:shops.manage'
-    ]);
-	Route::delete('shops/{shop}/delete', [
-        'as' => 'backend.shop.delete',
-        'uses' => 'ShopsController@delete',
-        'middleware' => 'permission:shops.manage'
-    ]);
-	Route::delete('shops/{shop}/hard_delete', [
-        'as' => 'backend.shop.hard_delete',
-        'uses' => 'ShopsController@hard_delete',
-        'middleware' => 'permission:shops.manage'
-    ]);
-    Route::delete('shops/{shop}/action/{action}', [
-        'as' => 'backend.shop.action',
-        'uses' => 'ShopsController@action',
-        'middleware' => 'permission:shops.manage'
-    ]);
+        Route::get('shops/{shop}/edit', [
+            'as' => 'backend.shop.edit',
+            'uses' => 'ShopsController@edit',
+            'middleware' => 'permission:shops.manage'
+        ]);
+        Route::post('shops/{shop}/update', [
+            'as' => 'backend.shop.update',
+            'uses' => 'ShopsController@update',
+            'middleware' => 'permission:shops.manage'
+        ]);
+        Route::post('shops/balance', [
+            'as' => 'backend.shop.balance',
+            'uses' => 'ShopsController@balance',
+            'middleware' => 'permission:shops.manage'
+        ]);
+        Route::delete('shops/{shop}/delete', [
+            'as' => 'backend.shop.delete',
+            'uses' => 'ShopsController@delete',
+            'middleware' => 'permission:shops.manage'
+        ]);
+        Route::delete('shops/{shop}/hard_delete', [
+            'as' => 'backend.shop.hard_delete',
+            'uses' => 'ShopsController@hard_delete',
+            'middleware' => 'permission:shops.manage'
+        ]);
+        Route::delete('shops/{shop}/action/{action}', [
+            'as' => 'backend.shop.action',
+            'uses' => 'ShopsController@action',
+            'middleware' => 'permission:shops.manage'
+        ]);
 
         /**
          * Pincodes routes
@@ -1183,7 +1181,7 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
          * Return routes
          */
 
-    	Route::get('returns', [
+        Route::get('returns', [
             'as' => 'backend.returns.list',
             'uses' => 'ReturnsController@index',
             'middleware' => 'permission:returns.manage',
@@ -1202,11 +1200,11 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
             'as' => 'backend.returns.edit',
             'uses' => 'ReturnsController@edit',
         ]);
-    	Route::post('returns/{return}/update', [
+        Route::post('returns/{return}/update', [
             'as' => 'backend.returns.update',
             'uses' => 'ReturnsController@update',
         ]);
-    	Route::delete('returns/{return}/delete', [
+        Route::delete('returns/{return}/delete', [
             'as' => 'backend.returns.delete',
             'uses' => 'ReturnsController@delete',
             'middleware' => 'permission:returns.delete',
@@ -1245,8 +1243,8 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
         ]);
 
         /**
-        * Roles & Permissions
-        */
+         * Roles & Permissions
+         */
 
         Route::get('role', [
             'as' => 'backend.role.index',
@@ -1279,11 +1277,11 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
             'uses' => 'PermissionsController@saveRolePermissions'
         ]);
 
-    	/**
+        /**
          * Permissions
          */
 
-    	Route::get('permission', [
+        Route::get('permission', [
             'as' => 'backend.permission.index',
             'uses' => 'PermissionsController@index',
             'middleware' => 'permission:permissions.manage'
@@ -1337,13 +1335,13 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
             'middleware' => 'permission:settings.auth'
         ]);
 
-    	Route::get('generator', [
+        Route::get('generator', [
             'as' => 'backend.settings.generator',
             'uses' => 'SettingsController@generator',
             'middleware' => 'permission:settings.generator'
         ]);
 
-    	Route::post('generator', [
+        Route::post('generator', [
             'as' => 'backend.settings.generator.post',
             'uses' => 'SettingsController@generator',
             'middleware' => 'permission:settings.generator'
@@ -1385,7 +1383,5 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
             'as' => 'backend.activity.clear',
             'uses' => 'ActivityController@clear',
         ]);
-
-	});
+    });
 });
-

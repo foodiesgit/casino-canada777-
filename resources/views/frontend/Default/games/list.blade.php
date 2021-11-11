@@ -7,7 +7,6 @@
 @section('content')
 <section id="game-list">
     <!-- GAMES - BEGIN -->
-
     <div class="section-title">
         <h3>{{$currentListTitle}} Games</h3>
         <input type="hidden" id="currentListTitleInput" value="{{$currentSliderNum}}">
@@ -86,8 +85,6 @@
         @endif
     @endif
 </section>
-@endsection
-@section('page_bottom')
 <script>
     // window.addEventListener('scroll', function() {
     //     var element = document.querySelector('#main_footer');

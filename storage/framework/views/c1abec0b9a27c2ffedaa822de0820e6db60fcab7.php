@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('slider'); ?>
 <section id="hero-section">
     <iframe class="d-sm-block" style="overflow:hidden !important; height:450px; padding:0px !important; margin:0px !important; border: none !important;" width="100%" src="http://canada777.com/slides/slide.php" allowfullscreen scrolling="no"></iframe>
@@ -7,7 +6,6 @@
 <?php $__env->startSection('content'); ?>
 <section id="game-list">
     <!-- GAMES - BEGIN -->
-
     <div class="section-title">
         <h3><?php echo e($currentListTitle); ?> Games</h3>
         <input type="hidden" id="currentListTitleInput" value="<?php echo e($currentSliderNum); ?>">
@@ -86,8 +84,6 @@
         <?php endif; ?>
     <?php endif; ?>
 </section>
-<?php $__env->stopSection(); ?>
-<?php $__env->startSection('page_bottom'); ?>
 <script>
     // window.addEventListener('scroll', function() {
     //     var element = document.querySelector('#main_footer');
