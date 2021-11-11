@@ -48,9 +48,6 @@
     <?php echo $__env->yieldContent('page_top'); ?>
 </head>
 <body id="main_body">
-    <?php
-    dd("jhkllllll");
-    ?>
     <?php echo $__env->make('component.frontend.layout.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <main>
     	<?php echo $__env->yieldContent('slider'); ?>
@@ -60,6 +57,7 @@
         <?php echo $__env->make('component.frontend.layout.search', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php echo $__env->make('component.frontend.layout.playfun', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php echo $__env->make('component.frontend.layout.deposit', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php echo $__env->make('component.frontend.layout.category_bottom', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </main>
     <?php echo $__env->make('component.frontend.layout.seocontent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php echo $__env->make('component.frontend.layout.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

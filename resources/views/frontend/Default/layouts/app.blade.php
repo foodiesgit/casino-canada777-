@@ -57,6 +57,7 @@
         @include('component.frontend.layout.search')
         @include('component.frontend.layout.playfun')
         @include('component.frontend.layout.deposit')
+        @include('component.frontend.layout.category_bottom')
     </main>
     @include('component.frontend.layout.seocontent')
     @include('component.frontend.layout.footer')
