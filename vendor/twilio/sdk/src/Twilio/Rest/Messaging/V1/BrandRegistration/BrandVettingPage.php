@@ -7,13 +7,16 @@
  * /       /
  */
 
-namespace Twilio\Rest\Verify\V2;
+namespace Twilio\Rest\Messaging\V1\BrandRegistration;
 
 use Twilio\Http\Response;
 use Twilio\Page;
 use Twilio\Version;
 
-class VerificationTemplatePage extends Page {
+/**
+ * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
+ */
+class BrandVettingPage extends Page {
     /**
      * @param Version $version Version that contains the resource
      * @param Response $response Response from the API
@@ -28,10 +31,10 @@ class VerificationTemplatePage extends Page {
 
     /**
      * @param array $payload Payload response from the API
-     * @return VerificationTemplateInstance \Twilio\Rest\Verify\V2\VerificationTemplateInstance
+     * @return BrandVettingInstance \Twilio\Rest\Messaging\V1\BrandRegistration\BrandVettingInstance
      */
-    public function buildInstance(array $payload): VerificationTemplateInstance {
-        return new VerificationTemplateInstance($this->version, $payload);
+    public function buildInstance(array $payload): BrandVettingInstance {
+        return new BrandVettingInstance($this->version, $payload, $this->solution['brandSid']);
     }
 
     /**
@@ -40,6 +43,6 @@ class VerificationTemplatePage extends Page {
      * @return string Machine friendly representation
      */
     public function __toString(): string {
-        return '[Twilio.Verify.V2.VerificationTemplatePage]';
+        return '[Twilio.Messaging.V1.BrandVettingPage]';
     }
 }

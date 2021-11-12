@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
+        'pretty_version' => 'dev-develop',
+        'version' => 'dev-develop',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'a35099d79c1d95984aa403dbb229c8a181fdbd29',
+        'reference' => 'fccb1d0e1acf8ed2a3c5297616aa7134f6219f4d',
         'name' => 'loshmis/vanguard',
         'dev' => true,
     ),
@@ -536,12 +536,12 @@
             'dev_requirement' => false,
         ),
         'loshmis/vanguard' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'a35099d79c1d95984aa403dbb229c8a181fdbd29',
+            'reference' => 'fccb1d0e1acf8ed2a3c5297616aa7134f6219f4d',
             'dev_requirement' => false,
         ),
         'malkusch/lock' => array(
@@ -868,8 +868,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -1332,12 +1332,12 @@
             'dev_requirement' => false,
         ),
         'twilio/sdk' => array(
-            'pretty_version' => '6.28.3',
-            'version' => '6.28.3.0',
+            'pretty_version' => '6.31.0',
+            'version' => '6.31.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../twilio/sdk',
             'aliases' => array(),
-            'reference' => '6780831aea36193de0743e676e0b2090068ab9d7',
+            'reference' => '9a866ad7e6b4681c7d9564ee7b9d97cb67deb6a0',
             'dev_requirement' => false,
         ),
         'tymon/jwt-auth' => array(

@@ -53,6 +53,7 @@ class RoomList extends ListResource {
             'VideoCodecs' => Serialize::map($options['videoCodecs'], function($e) { return $e; }),
             'MediaRegion' => $options['mediaRegion'],
             'RecordingRules' => Serialize::jsonObject($options['recordingRules']),
+            'AudioOnly' => Serialize::booleanToString($options['audioOnly']),
         ]);
 
         $payload = $this->version->create('POST', $this->uri, [], $data);

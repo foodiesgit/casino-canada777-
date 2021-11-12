@@ -8615,17 +8615,17 @@
         },
         {
             "name": "twilio/sdk",
-            "version": "6.28.3",
-            "version_normalized": "6.28.3.0",
+            "version": "6.31.0",
+            "version_normalized": "6.31.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twilio/twilio-php.git",
-                "reference": "6780831aea36193de0743e676e0b2090068ab9d7"
+                "reference": "9a866ad7e6b4681c7d9564ee7b9d97cb67deb6a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/6780831aea36193de0743e676e0b2090068ab9d7",
-                "reference": "6780831aea36193de0743e676e0b2090068ab9d7",
+                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/9a866ad7e6b4681c7d9564ee7b9d97cb67deb6a0",
+                "reference": "9a866ad7e6b4681c7d9564ee7b9d97cb67deb6a0",
                 "shasum": ""
             },
             "require": {
@@ -8639,7 +8639,7 @@
             "suggest": {
                 "guzzlehttp/guzzle": "An HTTP client to execute the API requests"
             },
-            "time": "2021-09-22T19:23:31+00:00",
+            "time": "2021-11-03T22:47:25+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -8666,7 +8666,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twilio/twilio-php/issues",
-                "source": "https://github.com/twilio/twilio-php/tree/6.28.3"
+                "source": "https://github.com/twilio/twilio-php/tree/6.31.0"
             },
             "install-path": "../twilio/sdk"
         },

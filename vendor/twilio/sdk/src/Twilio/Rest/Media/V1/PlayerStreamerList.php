@@ -7,17 +7,19 @@
  * /       /
  */
 
-namespace Twilio\Rest\Verify\V2;
+namespace Twilio\Rest\Media\V1;
 
+use Twilio\Exceptions\TwilioException;
 use Twilio\ListResource;
 use Twilio\Options;
+use Twilio\Serialize;
 use Twilio\Stream;
 use Twilio\Values;
 use Twilio\Version;
 
-class VerificationTemplateList extends ListResource {
+class PlayerStreamerList extends ListResource {
     /**
-     * Construct the VerificationTemplateList
+     * Construct the PlayerStreamerList
      *
      * @param Version $version Version that contains the resource
      */
@@ -27,12 +29,32 @@ class VerificationTemplateList extends ListResource {
         // Path Solution
         $this->solution = [];
 
-        $this->uri = '/Templates';
+        $this->uri = '/PlayerStreamers';
     }
 
     /**
-     * Streams VerificationTemplateInstance records from the API as a generator
-     * stream.
+     * Create the PlayerStreamerInstance
+     *
+     * @param array|Options $options Optional Arguments
+     * @return PlayerStreamerInstance Created PlayerStreamerInstance
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function create(array $options = []): PlayerStreamerInstance {
+        $options = new Values($options);
+
+        $data = Values::of([
+            'Video' => Serialize::booleanToString($options['video']),
+            'StatusCallback' => $options['statusCallback'],
+            'StatusCallbackMethod' => $options['statusCallbackMethod'],
+        ]);
+
+        $payload = $this->version->create('POST', $this->uri, [], $data);
+
+        return new PlayerStreamerInstance($this->version, $payload);
+    }
+
+    /**
+     * Streams PlayerStreamerInstance records from the API as a generator stream.
      * This operation lazily loads records as efficiently as possible until the
      * limit
      * is reached.
@@ -59,7 +81,7 @@ class VerificationTemplateList extends ListResource {
     }
 
     /**
-     * Reads VerificationTemplateInstance records from the API as a list.
+     * Reads PlayerStreamerInstance records from the API as a list.
      * Unlike stream(), this operation is eager and will load `limit` records into
      * memory before returning.
      *
@@ -72,27 +94,28 @@ class VerificationTemplateList extends ListResource {
      *                        page_size is defined but a limit is defined, read()
      *                        will attempt to read the limit with the most
      *                        efficient page size, i.e. min(limit, 1000)
-     * @return VerificationTemplateInstance[] Array of results
+     * @return PlayerStreamerInstance[] Array of results
      */
     public function read(array $options = [], int $limit = null, $pageSize = null): array {
         return \iterator_to_array($this->stream($options, $limit, $pageSize), false);
     }
 
     /**
-     * Retrieve a single page of VerificationTemplateInstance records from the API.
+     * Retrieve a single page of PlayerStreamerInstance records from the API.
      * Request is executed immediately
      *
      * @param array|Options $options Optional Arguments
      * @param mixed $pageSize Number of records to return, defaults to 50
      * @param string $pageToken PageToken provided by the API
      * @param mixed $pageNumber Page Number, this value is simply for client state
-     * @return VerificationTemplatePage Page of VerificationTemplateInstance
+     * @return PlayerStreamerPage Page of PlayerStreamerInstance
      */
-    public function page(array $options = [], $pageSize = Values::NONE, string $pageToken = Values::NONE, $pageNumber = Values::NONE): VerificationTemplatePage {
+    public function page(array $options = [], $pageSize = Values::NONE, string $pageToken = Values::NONE, $pageNumber = Values::NONE): PlayerStreamerPage {
         $options = new Values($options);
 
         $params = Values::of([
-            'FriendlyName' => $options['friendlyName'],
+            'Order' => $options['order'],
+            'Status' => $options['status'],
             'PageToken' => $pageToken,
             'Page' => $pageNumber,
             'PageSize' => $pageSize,
@@ -100,24 +123,32 @@ class VerificationTemplateList extends ListResource {
 
         $response = $this->version->page('GET', $this->uri, $params);
 
-        return new VerificationTemplatePage($this->version, $response, $this->solution);
+        return new PlayerStreamerPage($this->version, $response, $this->solution);
     }
 
     /**
-     * Retrieve a specific page of VerificationTemplateInstance records from the
-     * API.
+     * Retrieve a specific page of PlayerStreamerInstance records from the API.
      * Request is executed immediately
      *
      * @param string $targetUrl API-generated URL for the requested results page
-     * @return VerificationTemplatePage Page of VerificationTemplateInstance
+     * @return PlayerStreamerPage Page of PlayerStreamerInstance
      */
-    public function getPage(string $targetUrl): VerificationTemplatePage {
+    public function getPage(string $targetUrl): PlayerStreamerPage {
         $response = $this->version->getDomain()->getClient()->request(
             'GET',
             $targetUrl
         );
 
-        return new VerificationTemplatePage($this->version, $response, $this->solution);
+        return new PlayerStreamerPage($this->version, $response, $this->solution);
+    }
+
+    /**
+     * Constructs a PlayerStreamerContext
+     *
+     * @param string $sid The SID that identifies the resource to fetch
+     */
+    public function getContext(string $sid): PlayerStreamerContext {
+        return new PlayerStreamerContext($this->version, $sid);
     }
 
     /**
@@ -126,6 +157,6 @@ class VerificationTemplateList extends ListResource {
      * @return string Machine friendly representation
      */
     public function __toString(): string {
-        return '[Twilio.Verify.V2.VerificationTemplateList]';
+        return '[Twilio.Media.V1.PlayerStreamerList]';
     }
 }

@@ -1,6 +1,6 @@
-<?php 
-namespace VanguardLTE\Http\Controllers\Web\Backend\Auth
-{
+<?php
+
+namespace VanguardLTE\Http\Controllers\Web\Backend\Auth {
     class AuthController extends \VanguardLTE\Http\Controllers\Controller
     {
         private $users = null;
@@ -14,7 +14,7 @@ namespace VanguardLTE\Http\Controllers\Web\Backend\Auth
             ]);
             $this->middleware('registration', [
                 'only' => [
-                    'getRegister', 
+                    'getRegister',
                     'postRegister'
                 ]
             ]);
@@ -23,8 +23,7 @@ namespace VanguardLTE\Http\Controllers\Web\Backend\Auth
         public function getLogin()
         {
             $directories = [];
-            foreach( glob(resource_path() . '/lang/*', GLOB_ONLYDIR) as $fileinfo ) 
-            {
+            foreach (glob(resource_path() . '/lang/*', GLOB_ONLYDIR) as $fileinfo) {
                 $dirname = basename($fileinfo);
                 $directories[$dirname] = $dirname;
             }
@@ -34,48 +33,38 @@ namespace VanguardLTE\Http\Controllers\Web\Backend\Auth
         {
             $throttles = settings('throttle_enabled');
             $to = ($request->has('to') ? '?to=' . $request->get('to') : '');
-            if( $throttles && $this->hasTooManyLoginAttempts($request) ) 
-            {
+            if ($throttles && $this->hasTooManyLoginAttempts($request)) {
                 return $this->sendLockoutResponse($request);
             }
             $credentials = $request->getCredentials();
-            if( !\Auth::validate($credentials) ) 
-            {
-                if( $throttles ) 
-                {
+            if (!\Auth::validate($credentials)) {
+                if ($throttles) {
                     $this->incrementLoginAttempts($request);
                 }
                 return redirect()->to('backend/login' . $to)->withErrors(trans('auth.failed'));
             }
             $user = \Auth::getProvider()->retrieveByCredentials($credentials);
-            if( $request->lang ) 
-            {
+            if ($request->lang) {
                 $user->update(['language' => $request->lang]);
             }
-            if( !$user->hasRole('admin') && setting('siteisclosed') ) 
-            {
+            if (!$user->hasRole('admin') && setting('siteisclosed')) {
                 \Auth::logout();
                 return redirect()->route('backend.auth.login')->withErrors(trans('app.site_is_turned_off'));
             }
-            if( $user->hasRole([
-                1, 
-                2, 
+            if ($user->hasRole([
+                1,
+                2,
                 3
-            ]) && (!$user->shop || $user->shop->is_blocked) ) 
-            {
+            ]) && (!$user->shop || $user->shop->is_blocked)) {
                 return redirect()->to('backend/login' . $to)->withErrors(trans('app.your_shop_is_blocked'));
             }
-            if( $user->isBanned() ) 
-            {
+            if ($user->isBanned()) {
                 return redirect()->to('backend/login' . $to)->withErrors(trans('app.your_account_is_banned'));
             }
             \Auth::login($user, settings('remember_me') && $request->get('remember'));
-            if( settings('reset_authentication') && count($sessionRepository->getUserSessions(\Auth::id())) ) 
-            {
-                foreach( $sessionRepository->getUserSessions($user->id) as $session ) 
-                {
-                    if( $session->id != session()->getId() ) 
-                    {
+            if (settings('reset_authentication') && count($sessionRepository->getUserSessions(\Auth::id()))) {
+                foreach ($sessionRepository->getUserSessions($user->id) as $session) {
+                    if ($session->id != session()->getId()) {
                         $sessionRepository->invalidateSession($session->id);
                     }
                 }
@@ -84,17 +73,14 @@ namespace VanguardLTE\Http\Controllers\Web\Backend\Auth
         }
         protected function handleUserWasAuthenticated(\Illuminate\Http\Request $request, $throttles, $user)
         {
-            if( $throttles ) 
-            {
+            if ($throttles) {
                 $this->clearLoginAttempts($request);
             }
             event(new \VanguardLTE\Events\User\LoggedIn());
-            if( $request->has('to') ) 
-            {
+            if ($request->has('to')) {
                 return redirect()->to($request->get('to'));
             }
-            if( !\Auth::user()->hasPermission('dashboard') ) 
-            {
+            if (!\Auth::user()->hasPermission('dashboard')) {
                 return redirect()->route('backend.user.list');
             }
             return redirect()->route('backend.dashboard');
@@ -142,8 +128,7 @@ namespace VanguardLTE\Http\Controllers\Web\Backend\Auth
         protected function lockoutTime()
         {
             $lockout = (int)settings('throttle_lockout_time');
-            if( $lockout <= 1 ) 
-            {
+            if ($lockout <= 1) {
                 $lockout = 1;
             }
             return 60 * $lockout;
@@ -161,5 +146,4 @@ namespace VanguardLTE\Http\Controllers\Web\Backend\Auth
             return redirect('/backend/login')->with('success', trans('app.account_created_login'));
         }
     }
-
 }
