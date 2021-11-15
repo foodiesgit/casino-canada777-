@@ -194,9 +194,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         VanguardLTE\Providers\EventServiceProvider::class,
         VanguardLTE\Providers\RouteServiceProvider::class,
-		
-		jeremykenedy\LaravelRoles\RolesServiceProvider::class,
-		
+
+        jeremykenedy\LaravelRoles\RolesServiceProvider::class,
+
         Yajra\DataTables\DataTablesServiceProvider::class,
 
     ],
@@ -261,5 +261,10 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
 
     ],
+
+    /** Twilio values */
+    'TWILIO_SID' => env("TWILIO_SID"),
+    'TWILIO_TOKEN' => env("TWILIO_TOKEN"),
+    'TWILIO_NUMBER' => env("TWILIO_NUMBER"),
 
 ];

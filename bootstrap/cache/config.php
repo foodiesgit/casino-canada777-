@@ -99,6 +99,9 @@
       'Agent' => 'Jenssegers\\Agent\\Facades\\Agent',
       'DataTables' => 'Yajra\\DataTables\\Facades\\DataTables',
     ),
+    'TWILIO_SID' => 'ACe38e712ae5aeed817d3e24b24b6f326a',
+    'TWILIO_TOKEN' => '8113f8fca64a6e4dc6e1230fa6e91acf',
+    'TWILIO_NUMBER' => '(365) 598-5666',
   ),
   'auth' => 
   array (

@@ -5,7 +5,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
     use VanguardLTE\User;
     use VanguardLTE\WelcomePackageLog;
     use Twilio\Rest\Client;
-    use Illuminate\Support\Facades\Log;
+    use Illuminate\Support\Facades\Auth;
 
     class AuthController extends \VanguardLTE\Http\Controllers\Controller
     {
@@ -42,7 +42,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
         public function getBasicTheme()
         {
             $frontend = settings('frontend', 'Default');
-            if (\Auth::check()) {
+            if (Auth::check()) {
             }
             return $frontend;
         }
@@ -101,16 +101,14 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
                     'password' => $credentials['password']
                 ];
             }
-            if (!\Auth::validate($credentials)) {
-                dd("1");
+            if (!Auth::validate($credentials)) {
                 if ($throttles) {
                     $this->incrementLoginAttempts($request);
                 }
                 // return redirect()->to('login' . $to)->withErrors(trans('auth.failed'));
                 return redirect('categories/all?login=fail')->withErrors(trans('auth.failed'));
             }
-            dd('postlogin',  $request->login_visitorId);
-            $user = \Auth::getProvider()->retrieveByCredentials($credentials);
+            $user = Auth::getProvider()->retrieveByCredentials($credentials);
             if ($user->hasRole([
                 1,
                 2,
@@ -128,8 +126,8 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
             if ($request->lang) {
                 $user->update(['language' => $request->lang]);
             }
-            \Auth::login($user, settings('remember_me') && $request->get('remember'));
-            if (settings('reset_authentication') && count($sessionRepository->getUserSessions(\Auth::id()))) {
+            Auth::login($user, settings('remember_me') && $request->get('remember'));
+            if (settings('reset_authentication') && count($sessionRepository->getUserSessions(Auth::id()))) {
                 foreach ($sessionRepository->getUserSessions($user->id) as $session) {
                     if ($session->id != session()->getId()) {
                         $sessionRepository->invalidateSession($session->id);
@@ -140,13 +138,13 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
         }
         public function apiLogin($game, $token, $mode)
         {
-            if (\Auth::check()) {
+            if (Auth::check()) {
                 event(new \VanguardLTE\Events\User\LoggedOut());
-                \Auth::logout();
+                Auth::logout();
             }
             $us = \VanguardLTE\User::where('api_token', '=', $token)->get();
             if (isset($us[0]->id)) {
-                \Auth::loginUsingId($us[0]->id, true);
+                Auth::loginUsingId($us[0]->id, true);
                 $ref = request()->server('HTTP_REFERER');
                 if ($mode == 'desktop') {
                     $gameUrl = 'game/' . $game . '?lobby_url=frame';
@@ -168,7 +166,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
                 return redirect()->to($request->get('to'));
             }
             if (!$user->hasRole('user')) {
-                if (!\Auth::user()->hasPermission('dashboard')) {
+                if (!Auth::user()->hasPermission('dashboard')) {
                     return redirect()->route('backend.user.list');
                 }
                 return redirect()->route('backend.dashboard');
@@ -178,7 +176,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
         public function getLogout()
         {
             event(new \VanguardLTE\Events\User\LoggedOut());
-            \Auth::logout();
+            Auth::logout();
             return redirect('/');
         }
         public function loginUsername()
@@ -271,10 +269,11 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
             $user->province = $request->user_address_state;
             $user->postalCode = $request->user_address_postcode;
             $user->role_id = 1;
-            $user->shop_id = 0;
+            $user->shop_id = 1;
             $user->visitor_id = $request->visitorId ? $request->visitorId : "";
             $user->status = settings('use_email') ? \VanguardLTE\Support\Enum\UserStatus::UNCONFIRMED : \VanguardLTE\Support\Enum\UserStatus::ACTIVE;
             $user->save();
+
 
             $role = \jeremykenedy\LaravelRoles\Models\Role::where('name', '=', 'User')->first();
             $user->attachRole($role);
@@ -319,7 +318,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
 
             // if (!settings('use_email'))
             // {
-            //     \Auth::login($user, true);
+            //     Auth::login($user, true);
             // }
 
             /*
@@ -334,7 +333,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
             $message = (settings('use_email') ? trans('app.account_create_confirm_email') : trans('app.account_created_login'));
             if( !settings('use_email') )
             {
-                \Auth::login($user, true);
+                Auth::login($user, true);
             }
             */
             return redirect()->route('frontend.auth.login')->with('success', $message);
@@ -428,7 +427,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
 
             // if (!settings('use_email'))
             // {
-            //     \Auth::login($user, true);
+            //     Auth::login($user, true);
             // }
 
             /*
@@ -443,7 +442,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
             $message = (settings('use_email') ? trans('app.account_create_confirm_email') : trans('app.account_created_login'));
             if( !settings('use_email') )
             {
-                \Auth::login($user, true);
+                Auth::login($user, true);
             }
             */
             return redirect()->route('frontend.auth.login')->with('success', $message);
@@ -452,6 +451,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
 
         public function postRegisterPage(\Illuminate\Http\Request $request)
         {
+            dd("sdfsdf");
             if (empty($request->username)) {
                 return redirect('register')->withErrors(trans('validation.invalid', ['attribute' => trans('app.username')]));
             }
@@ -496,7 +496,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
             $message = settings('use_email') ? trans('app.account_create_confirm_email') : trans('app.account_created_login');
 
             if (!settings('use_email')) {
-                \Auth::login($user, true);
+                Auth::login($user, true);
             }
 
             /*
@@ -511,7 +511,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
             $message = (settings('use_email') ? trans('app.account_create_confirm_email') : trans('app.account_created_login'));
             if( !settings('use_email') )
             {
-                \Auth::login($user, true);
+                Auth::login($user, true);
             }
             */
             return redirect()->route('frontend.auth.login')->with('success', $message);
@@ -598,7 +598,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
             $user->save();
 
             event(new \VanguardLTE\Events\User\ResetedPasswordViaEmail($user));
-            \Auth::login($user);
+            Auth::login($user);
 
             return redirect('');
         }
@@ -730,12 +730,11 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
         /* --- */
         public function sendSMS($receiverNumber, $message)
         {
-            $receiverNumber = "+15819826385";
-            $message = "Hello, i am testing now on the my local pc for canada777.com";
+            $receiverNumber = "+17609833557";
 
-            $account_sid = env("TWILIO_SID");
-            $auth_token = env("TWILIO_TOKEN");
-            $twilio_number = env("TWILIO_NUMBER");
+            $account_sid = "ACe38e712ae5aeed817d3e24b24b6f326a";
+            $auth_token = '8113f8fca64a6e4dc6e1230fa6e91acf';
+            $twilio_number = '(365) 598-5666';
 
             try {
                 $client = new Client($account_sid, $auth_token);
@@ -743,9 +742,8 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
                     'from' => $twilio_number,
                     'body' => $message
                 ]);
-                Log::info($message);
             } catch (Exception $e) {
-                Log::error("Error: " . $e->getMessage());
+                dd("error" . $message);
             }
         }
     }

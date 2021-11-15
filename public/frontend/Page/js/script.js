@@ -1387,7 +1387,7 @@ function fillInAddress() {
     // Get each component of the address from the place details,
     // and then fill-in the corresponding field on the form.
     // place.address_components are google.maps.GeocoderAddressComponent objects
-    // which are documented at http://goo.gle/3l5i5Mr    
+    // which are documented at http://goo.gle/3l5i5Mr
     for (const component of place.address_components) {
         switch (componentType) {
             case "street_number": {

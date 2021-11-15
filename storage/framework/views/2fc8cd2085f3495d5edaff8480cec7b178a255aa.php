@@ -316,4 +316,5 @@
 
         </div>
     </div>
-</div><?php /**PATH D:\00work\06casino\canada777\resources\views/component/frontend/layout/auth.blade.php ENDPATH**/ ?>
+</div>
+<?php /**PATH D:\00work\06casino\canada777\resources\views/component/frontend/layout/auth.blade.php ENDPATH**/ ?>
