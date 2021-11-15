@@ -7845,3 +7845,7 @@
 #53 D:\\00work\\06casino\\canada777\\server.php(21): require_once('D:\\\\00work\\\\06cas...')
 #54 {main}
 "} 
+[2021-11-15 02:49:48] local.ERROR: Constant expression contains invalid operations {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Constant expression contains invalid operations at D:\\00work\\06casino\\canada777\\app\\Http\\Controllers\\Web\\Frontend\\Auth\\AuthController.php:16)
+[stacktrace]
+#0 {main}
+"} 

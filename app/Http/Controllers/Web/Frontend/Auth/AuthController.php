@@ -5,7 +5,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
     use VanguardLTE\User;
     use VanguardLTE\WelcomePackageLog;
     use Twilio\Rest\Client;
-
+    use Illuminate\Support\Facades\Log;
 
     class AuthController extends \VanguardLTE\Http\Controllers\Controller
     {
@@ -62,29 +62,6 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
         }
         public function postLogin(\VanguardLTE\Http\Requests\Auth\LoginRequest $request, \VanguardLTE\Repositories\Session\SessionRepository $sessionRepository)
         {
-            $receiverNumber = "+15819826385";
-            $message = "Hello, i am testing now on the my local pc for canada777.com";
-
-            try {
-
-                $account_sid = 'ACe38e712ae5aeed817d3e24b24b6f326a';
-                $auth_token = '8113f8fca64a6e4dc6e1230fa6e91acf';
-                $twilio_number = '(365) 598-5666';
-
-                $client = new Client($account_sid, $auth_token);
-                $client->messages->create($receiverNumber, [
-                    'from' => $twilio_number,
-                    'body' => $message
-                ]);
-
-                dd('SMS Sent Successfully.');
-            } catch (Exception $e) {
-                dd("Error: " . $e->getMessage());
-            }
-
-
-
-
             $throttles = settings('throttle_enabled');
             $to = ($request->has('to') ? '?to=' . $request->get('to') : '');
             if ($throttles && $this->hasTooManyLoginAttempts($request)) {
@@ -125,12 +102,14 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
                 ];
             }
             if (!\Auth::validate($credentials)) {
+                dd("1");
                 if ($throttles) {
                     $this->incrementLoginAttempts($request);
                 }
                 // return redirect()->to('login' . $to)->withErrors(trans('auth.failed'));
                 return redirect('categories/all?login=fail')->withErrors(trans('auth.failed'));
             }
+            dd('postlogin',  $request->login_visitorId);
             $user = \Auth::getProvider()->retrieveByCredentials($credentials);
             if ($user->hasRole([
                 1,
@@ -749,5 +728,25 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth {
             }
         }
         /* --- */
+        public function sendSMS($receiverNumber, $message)
+        {
+            $receiverNumber = "+15819826385";
+            $message = "Hello, i am testing now on the my local pc for canada777.com";
+
+            $account_sid = env("TWILIO_SID");
+            $auth_token = env("TWILIO_TOKEN");
+            $twilio_number = env("TWILIO_NUMBER");
+
+            try {
+                $client = new Client($account_sid, $auth_token);
+                $client->messages->create($receiverNumber, [
+                    'from' => $twilio_number,
+                    'body' => $message
+                ]);
+                Log::info($message);
+            } catch (Exception $e) {
+                Log::error("Error: " . $e->getMessage());
+            }
+        }
     }
 }
